@@ -1,0 +1,43 @@
+div,p{
+  font-family:
+      "Microsoft Yahei",
+      sans-serif,
+      "WenQuanYi Microhei";
+  font-size: 16pt;
+}
+
+div.header{
+  font-size: 1.2em;
+  background-color: #444444;
+  color: white;
+  padding: 1px
+}
+
+div.header p{
+  align: left;
+  padding-left: 20px;
+}
+
+canvas#cv{
+  width: 600px;
+  height: 600px;
+  background-color: white;
+  float: left;
+  margin: 10px;
+}
+
+div.control{
+  width: 600px;
+  width: 600px;
+  border: 1px solid #777777;
+  float: left;
+  padding: 10px;
+  margin: 10px;
+}
+
+div.footer{
+  padding: 5px;
+  background-color: #222222;
+  color: #555555;
+  clear:both;
+}
