@@ -41,3 +41,11 @@ div.footer{
   color: #555555;
   clear:both;
 }
+
+div.footer a{
+  color:#555555;
+}
+
+div.footer a:hover{
+  color:white;
+}
