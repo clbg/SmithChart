@@ -9,7 +9,7 @@ function nz(x){
 	return x*300;
 }
 
-function sign(x) { return x > 0 ? 1 : x < 0 ? -1 : 0; }
+
 
 
 
@@ -78,7 +78,7 @@ SmithChart.prototype.drawChart=function(){
 SmithChart.prototype.drawArc=function(start, angle, color){
 	
 } 
-alert('fuck');
+
 
 
 
@@ -106,11 +106,9 @@ var SC=new SmithChart(ctx);
 	SC.ctx.strokeRect(0,0,600,600);
 	
 	SC.drawChart();
-  
+
 	
-	
-	
-	
+	alert("同学您好！130222班 杨力同学诚招女友，联系电话***，非诚勿扰~");
 	
 	
 	
