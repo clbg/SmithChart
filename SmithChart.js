@@ -4,26 +4,26 @@ function SmithChart(ctx){
 }
 
 //画阻抗虚部的圆
-SmithChart.prototype.drawZIm(ZIm, color){
+SmithChart.prototype.drawZIm = function(ZIm, color){
 
 }
 
 //画阻抗实部的圆
-SmithChart.prototype.drawZRe(ZRe, color){
+SmithChart.prototype.drawZRe = function(ZRe, color){
 
 }
 
 //画坐标系（横纵轴）
-SmithChart.prototype.drawCoord(color){
+SmithChart.prototype.drawCoord = function(color){
 
 }
 
 //清空背景，然后重新绘制整个圆图（包括两种圆，横纵轴）
-SmithChart.prototype.drawChart(){
+SmithChart.prototype.drawChart = function(){
 
 }
 
 //画同心扇形（算输入阻抗和阻抗匹配时可能需要用）
-SmithChart.prototype.drawArc(start, angle, color){
+SmithChart.prototype.drawArc = function(start, angle, color){
 
 }

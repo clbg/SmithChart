@@ -1,11 +1,11 @@
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>史密斯圆图</title>
   <link rel="stylesheet" href="./smith_chart.css">
   <script src="./Complex.js"></script>
-  <script src="">
+  <script src="./SmithChart.js"></script>
+  <script src="./index.js"></script>
 <head>
 <body>
   <div class="header">
@@ -15,21 +15,21 @@
   <div class="control">
     <form>
       <p>反射系数</p><br>
-      <input type="number" name="gamma_re" value="0.0" step="0.1">+j
-      <input type="number" name="gamma_im" value="0.0" step="0.1">
-      <input type="button" name="OK" value="确定" onclick="gamma_ri_OK();">
+      <input type="number" id="gamma_re" name="gamma_re" value="0.0" step="0.1">+j
+      <input type="number" id="gamma_im" name="gamma_im" value="0.0" step="0.1">
+      <input type="button" name="OK" value="确定" onclick="gammaRiOK();">
       <br>
       <p>归一化阻抗</p>
       <br>
-      <input type="number" name="ZL_re" value="0.0" step="0.1">+j
-      <input type="number" name="ZL_im" value="0.0" step="0.1">Ohm
-      <input type="button" name="OK" value="确定" onclick="z_ri_OK();">
+      <input type="number" id="ZL_re" name="ZL_re" value="0.0" step="0.1">+j
+      <input type="number" id="ZL_im" name="ZL_im" value="0.0" step="0.1">Ohm
+      <input type="button" name="OK" value="确定" onclick="ZRiOK();">
       <br>
       <br>
     </form>
   </div>
   <div class="footer">
-    <p>&copy; Tang Zongxun and Peng Cheng 2015/10/23</p>
+    <p>&copy; <a href="mailto:stardust@live.hk">Tang Zongxun</a> and Peng Cheng 2015/10/23</p>
   </div>
 
   <script src="" ></script>
