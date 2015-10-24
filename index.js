@@ -1,5 +1,9 @@
 'use strict';
-var smithChart = new SmithChart();
+
+
+var canvas = document.getElementById("cv");
+var ctx = canvas.getContext("2d");
+var smithChart = new SmithChart(ctx);
 
 function setValue(x, id){
   document.getElementById(id).value = x.toFixed(2).toString();
