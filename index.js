@@ -18,11 +18,22 @@ function updateValueAndChart(impedence, gamma){
 
   setValue(gamma.r, "gamma_re");
   setValue(gamma.i, "gamma_im");
+  setValue(gamma.mag(), "gamma_r");
+  setValue(gamma.angle(), "gamma_theta");
 }
 
 function gammaRiOK(){
   var fn = function(x, y){
     var gamma = new Complex(x, y);
+    var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
+    updateValueAndChart(impedence, gamma);
+  }
+  fn(getValue("gamma_re"), getValue("gamma_im"));
+}
+
+function gammaRtOK(){
+  var fn = function(x, y){
+    var gamma = new Complex({angle: getValue("gamma_theta"), mag: getValue("gamma_r")});
     var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
     updateValueAndChart(impedence, gamma);
   }

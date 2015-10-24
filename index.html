@@ -13,24 +13,22 @@
   </div>
   <canvas id="cv"></canvas>
   <div class="control">
-    <form>
-      <p>反射系数</p><br>
+      <p>反射系数(a+jb)</p>
       <input type="number" id="gamma_re" name="gamma_re" value="0.0" step="0.1">+j
       <input type="number" id="gamma_im" name="gamma_im" value="0.0" step="0.1">
       <input type="button" name="OK" value="确定" onclick="gammaRiOK();">
-      <br>
-      <p>归一化阻抗</p>
-      <br>
+      <p>反射系数（r，θ）</p>
+      |Γ|:
+      <input type="number" id="gamma_r" name="gamma_r" value="0.0" step="0.1">θ:
+      <input type="number" id="gamma_theta" name="gamma_theta" value="0.0" step="0.1">
+      <input type="button" name="OK" value="确定" onclick="gammaRtOK();">
+      <p>归一化阻抗(R+jX)</p>
       <input type="number" id="ZL_re" name="ZL_re" value="0.0" step="0.1">+j
       <input type="number" id="ZL_im" name="ZL_im" value="0.0" step="0.1">Ohm
       <input type="button" name="OK" value="确定" onclick="ZRiOK();">
-      <br>
-      <br>
-    </form>
   </div>
   <div class="footer">
-    <p>&copy; <a href="mailto:stardust@live.hk">Tang Zongxun</a>
-      and <a href="mailto:pengcheng_handsome@yeah.net">Peng Cheng</a> 2015/10/23</p>
+    <p>&copy; <a href="mailto:stardust@live.hk">Tang Zongxun</a> and <a href="mailto:pengcheng_handsome@yeah.net">Peng Cheng</a> 2015/10/23</p>
   </div>
 
   <script src="" ></script>
