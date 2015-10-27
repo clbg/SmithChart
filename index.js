@@ -86,7 +86,9 @@ function cvMove(e){
     y = 1.0 - y / 300.0;
     var gamma = new Complex(x, y);
     var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
-    updateValueAndChart(impedence, gamma);
+    if(gamma.mag() < 1.0){
+      updateValueAndChart(impedence, gamma);
+    }
   }
 }
 
