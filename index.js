@@ -30,7 +30,7 @@ function gammaRiOK(){
     var gamma = new Complex(x, y);
     var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
     updateValueAndChart(impedence, gamma);
-  }
+  };
   fn(getValue("gamma_re"), getValue("gamma_im"));
 }
 
@@ -39,7 +39,7 @@ function gammaRtOK(){
     var gamma = new Complex({angle: getValue("gamma_theta"), mag: getValue("gamma_r")});
     var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
     updateValueAndChart(impedence, gamma);
-  }
+  };
   fn(getValue("gamma_re"), getValue("gamma_im"));
 }
 
@@ -48,7 +48,7 @@ function ZRiOK(){
     var impedence = new Complex(x, y);
     var gamma = new Complex(-1,0).add(impedence).mul(new Complex(1,0).add(impedence).inv());
     updateValueAndChart(impedence, gamma);
-  }
+  };
   fn(getValue("ZL_re"), getValue("ZL_im"));
 }
 
@@ -81,7 +81,6 @@ function cvMove(e){
     var cv = document.getElementById("cv");
     x = x - getX(cv) + document.body.scrollLeft;
     y = y - getY(cv) + document.body.scrollTop;
-    console.log(x,y);
     x = x / 300.0 - 1.0;
     y = 1.0 - y / 300.0;
     var gamma = new Complex(x, y);
