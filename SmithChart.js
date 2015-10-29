@@ -122,4 +122,4 @@ SmithChart.prototype.drawArc=function(start, angle, color){
 
 
 
-alert("同学您好！130222班 杨力同学诚招女友，微信：“yangliTXWD”，非诚勿扰~");
+//alert("同学您好！130222班 杨力同学诚招女友，微信：“yangliTXWD”，非诚勿扰~");
