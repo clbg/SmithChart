@@ -10,6 +10,12 @@
   <div class="header">
     <p>史密斯圆图</p>
   </div>
+  <div class="nav">
+      <ul>
+          <li><a href="index.html">主页</a></li>
+          <li><a href="match.html">匹配网络</a></li>
+      </ul>
+  </div>
   <canvas width="600" height="600" id="cv" onmousemove="cvMove(event);" onclick="cvClick();"></canvas>
   <div class="control">
       <p>反射系数(a+jb)</p>
@@ -21,13 +27,14 @@
       <input type="number" id="gamma_r" name="gamma_r" value="0.0" step="0.1">θ:
       <input type="number" id="gamma_theta" name="gamma_theta" value="0.0" step="0.1">
       <input type="button" name="OK" value="确定" onclick="gammaRtOK();">
+      <hr>
       <p>归一化阻抗(R+jX)</p>
       <input type="number" id="ZL_re" name="ZL_re" value="0.0" step="0.1">+j
       <input type="number" id="ZL_im" name="ZL_im" value="0.0" step="0.1">Ohm
       <input type="button" name="OK" value="确定" onclick="ZRiOK();">
   </div>
   <div class="footer">
-    <p>&copy; <a href="mailto:stardust@live.hk">Tang Zongxun</a> and <a href="mailto:pengcheng_handsome@yeah.net">Peng Cheng</a> Last Updated: 2015/10/24</p>
+    <p>&copy; <a href="mailto:tangzongxun@gmail.com">Tang Zongxun</a> and <a href="mailto:pengcheng_handsome@yeah.net">Peng Cheng</a> Last Updated: 2015/10/24</p>
   </div>
 
   <script src="./index.js"></script>

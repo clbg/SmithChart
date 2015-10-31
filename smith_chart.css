@@ -18,6 +18,18 @@ div.header p{
   padding-left: 20px;
 }
 
+div.nav{
+  line-height:30px;
+  background-color:#eeeeee;
+  width: 100%;
+  padding:5px;
+}
+
+div.nav ul li{
+  list-style-type: none;
+  display: inline;
+}
+
 canvas#cv{
   width: 600px;
   height: 600px;
@@ -27,7 +39,6 @@ canvas#cv{
 }
 
 div.control{
-  width: 600px;
   width: 600px;
   border: 1px solid #777777;
   float: left;

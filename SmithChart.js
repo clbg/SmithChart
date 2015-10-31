@@ -69,9 +69,9 @@ SmithChart.prototype.drawChart=function(color){
 	this.ctx.moveTo(nz(1),nz(0));
 	this.ctx.lineTo(nz(1),nz(2));
 	var list1=[];
-
+    var R;
 	//draw losts of ZRe
-	for(var R=0.1;R<1;R=R+0.1)
+	for(R=0.1;R<1;R=R+0.1)
 		list1.push(R)
 	for(R=1;R<2;R=R+0.2)
 		list1.push(R);
@@ -84,7 +84,7 @@ SmithChart.prototype.drawChart=function(color){
 	var list2=[];                  //老老实实用for语句吧
 	//draw losts of ZIm
 
-	for(var R =0;R <1; R=R+0.1)
+	for(R =0;R <1; R=R+0.1)
 		list2.push(R);
 	for(R=1;R<2;R=R+0.2)
 		list2.push(R);
