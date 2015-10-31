@@ -1,55 +1,74 @@
 'use strict';
 
-var canvas = document.getElementById("cv");
-var ctx = canvas.getContext("2d");
-var smithChart = new SmithChart(ctx);
+var smithChart = new SmithChart(document.getElementById("cv").getContext("2d"));
 
 function setValue(x, id){
-  document.getElementById(id).value = x.toFixed(2).toString();
+    document.getElementById(id).value = x.toFixed(2).toString();
 }
 
 function getValue(id){
-  return parseFloat(document.getElementById(id).value);
+    return parseFloat(document.getElementById(id).value);
 }
 
-function updateValueAndChart(impedence, gamma){
-  setValue(impedence.r, "ZL_re");
-  setValue(impedence.i, "ZL_im");
-  smithChart.drawChart();
-  smithChart.drawZIm(impedence.i, "#FF0000");
-  smithChart.drawZRe(impedence.r, "#FF0000");
+function impedence2gamma(impedence){
+    return new Complex(-1,0).add(impedence).mul(new Complex(1,0).add(impedence).inv());
+}
 
-  setValue(gamma.r, "gamma_re");
-  setValue(gamma.i, "gamma_im");
-  setValue(gamma.mag(), "gamma_r");
-  setValue(gamma.angle(), "gamma_theta");
+function gamma2impedence(gamma){
+    return new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
+}
+
+function updateValueAndChart(value){
+    var impedence, gamma;
+    if(typeof (value) == "object"){
+        if(value.gamma != null){
+            impedence = gamma2impedence(value.gamma);
+            gamma = value.gamma;
+            oldUpdate(gamma, impedence);
+        }
+        else if(value.impedence != null){
+            gamma = impedence2gamma(value.impedence);
+            impedence = value.impedence;
+            oldUpdate(gamma, impedence);
+        }
+    }
+
+    function oldUpdate(gamma, impedence){
+        setValue(impedence.r, "ZL_re");
+        setValue(impedence.i, "ZL_im");
+        smithChart.drawChart();
+        smithChart.drawZIm(impedence.i, "#FF0000");
+        smithChart.drawZRe(impedence.r, "#FF0000");
+
+        setValue(gamma.r, "gamma_re");
+        setValue(gamma.i, "gamma_im");
+        setValue(gamma.mag(), "gamma_r");
+        setValue(gamma.angle(), "gamma_theta");
+    }
 }
 
 function gammaRiOK(){
-  var fn = function(x, y){
-    var gamma = new Complex(x, y);
-    var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
-    updateValueAndChart(impedence, gamma);
-  };
-  fn(getValue("gamma_re"), getValue("gamma_im"));
+    var fn = function(x, y){
+        var gamma = new Complex(x, y);
+        updateValueAndChart({gamma: gamma});
+    };
+    fn(getValue("gamma_re"), getValue("gamma_im"));
 }
 
 function gammaRtOK(){
-  var fn = function(x, y){
-    var gamma = new Complex({angle: getValue("gamma_theta"), mag: getValue("gamma_r")});
-    var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
-    updateValueAndChart(impedence, gamma);
-  };
-  fn(getValue("gamma_re"), getValue("gamma_im"));
+    var fn = function(x, y){
+        var gamma = new Complex({angle: getValue("gamma_theta"), mag: getValue("gamma_r")});
+        updateValueAndChart({gamma: gamma});
+    };
+    fn(getValue("gamma_re"), getValue("gamma_im"));
 }
 
 function ZRiOK(){
-  var fn = function(x, y){
-    var impedence = new Complex(x, y);
-    var gamma = new Complex(-1,0).add(impedence).mul(new Complex(1,0).add(impedence).inv());
-    updateValueAndChart(impedence, gamma);
-  };
-  fn(getValue("ZL_re"), getValue("ZL_im"));
+    var fn = function(x, y){
+        var impedence = new Complex(x, y);
+        updateValueAndChart({impedence: impedence});
+    };
+    fn(getValue("ZL_re"), getValue("ZL_im"));
 }
 
 var cvFixed = 0;
@@ -84,9 +103,8 @@ function cvMove(e){
     x = x / 300.0 - 1.0;
     y = 1.0 - y / 300.0;
     var gamma = new Complex(x, y);
-    var impedence = new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
     if(gamma.mag() < 1.0){
-      updateValueAndChart(impedence, gamma);
+      updateValueAndChart({gamma:gamma});
     }
   }
 }
