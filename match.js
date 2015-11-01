@@ -29,12 +29,12 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 		
 		
 		if (high===1){
-			l=X1/(2*Math.PI*f0);
-			c=1/(X2*2*Math.PI*f0);
+			l=X2/(2*Math.PI*f0);
+			c=-1/(X1*2*Math.PI*f0);
 		}
 		else{
-			l=X2/(2*Math.PI*f0);
-			c=1/(X1*2*Math.PI*f0);
+			l=X1/(2*Math.PI*f0);
+			c=-1/(X2*2*Math.PI*f0);
 		}
 	}
 	else{
@@ -49,12 +49,12 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 		}
 		drawMatchChart(z0,X1,X2,zl,this.ctx, 1);
 		if(high===1){
-			l=X2/(2*Math.PI*f0);
-			c=1/(X1*2*Math.PI*f0);
+			l=X1/(2*Math.PI*f0);
+			c= -1/(X2*2*Math.PI*f0);
 		}
 		else{
-			l=X1/(2*Math.PI*f0);
-			c=1/(X2*2*Math.PI*f0);
+			l=X2/(2*Math.PI*f0);
+			c=-1/(X1*2*Math.PI*f0);
 		}
 	}
 	arglc.set('L',l);
@@ -127,6 +127,40 @@ Match.prototype.matchall=function(){
 		L.push(arglc.get('L'));
 		C.push(arglc.get('C'));
 	}
+
+	var s='nPQ';
+	if(n===1||n===2){
+		s= s.replace(/n/,n);
+	}
+
+	if(zl>z0){
+		s= s.replace(/P/,"B");
+	}
+	else{
+		s= s.replace(/P/,"S");
+	}
+
+	if(high===1){
+		s= s.replace(/Q/,"H");
+	}
+	else{
+		s= s.replace(/Q/,"L");
+	}
+	s="img/"+s+".png";
+	document.getElementById("cir_img").src = s;
+	var sd="L、C参数如下：<br>"; //S_how wor_D
+	for(i=0;i<n;i++){
+		sd=sd+"L"+i+":\t"+L[i].toPrecision(4)+"H<br>";
+		sd=sd+"C"+i+":\t"+C[i].toPrecision(4)+"F<br>"+"<br>";
+
+	}
+
+	document.getElementById("cir_para").innerHTML = sd;
+
+
+
+
+
 };
 
 function parallel(Z1, Z2){
