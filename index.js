@@ -14,14 +14,6 @@ function getIntValue(id){
     return parseInt(document.getElementById(id).value);
 }
 
-function impedence2gamma(impedence){
-    return new Complex(-1,0).add(impedence).mul(new Complex(1,0).add(impedence).inv());
-}
-
-function gamma2impedence(gamma){
-    return new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
-}
-
 function updateValueAndChart(value){
     var impedence, gamma;
     if(typeof (value) == "object"){

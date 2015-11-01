@@ -2,6 +2,8 @@
 
 //构造函数，ctx为canvas context
 
+var matchList = [];
+
  function SmithChart(ctx){
     this.ctx = ctx;
 }
@@ -9,6 +11,14 @@
 //normalize function
 function nz(x){
 	return x*300;
+}
+
+function impedence2gamma(impedence){
+	return new Complex(-1,0).add(impedence).mul(new Complex(1,0).add(impedence).inv());
+}
+
+function gamma2impedence(gamma){
+	return new Complex(1,0).add(gamma).mul(new Complex(1,0).add(gamma.neg()).inv());
 }
 
 // 画阻抗虚部的圆
@@ -49,7 +59,7 @@ SmithChart.prototype.drawZRe=function(ZRe, color){
 SmithChart.prototype.drawCoord=function(color){
 	this.ctx.beginPath();
 	var color = arguments[1] ? arguments[1] : "#8B5742";
-	this.ctx.strokeStyle = color
+	this.ctx.strokeStyle = color;
 	this.ctx.moveTo(nz(0),nz(1));
 	this.ctx.lineTo(nz(2),nz(1));
 	this.ctx.moveTo(nz(1),nz(0));
@@ -124,6 +134,17 @@ SmithChart.prototype.drawChart=function(color){
 	this.ctx.fillText("-0.5", 330,370);
 	this.ctx.fillText("-1", 310, 490);
 	this.ctx.fillText("-3", 500, 380);
+	this.ctx.beginPath();
+	this.ctx.strokeStyle="#00ff00";
+	for(i in matchList){
+		if(i == '0'){
+			this.ctx.moveTo(matchList[i].x, matchList[i].y);
+		}
+		else{
+			this.ctx.lineTo(matchList[i].x, matchList[i].y);
+		}
+	}
+	this.ctx.stroke();
 };
 
 
@@ -134,5 +155,15 @@ SmithChart.prototype.drawArc=function(start, angle, color){
 };
 
 
+function impedence2coord(impedence){
+	var gamma = impedence2gamma(impedence);
+	var x = (gamma.r + 1.0)*300.0;
+	var y = (1.0 - gamma.i)*300.0;
+	return new Coord(x,y);
+}
 
 //alert("同学您好！130222班 杨力同学诚招女友，微信：“yangliTXWD”，非诚勿扰~");
+function Coord(x, y){
+	this.x = x;
+	this.y = y;
+}

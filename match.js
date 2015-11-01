@@ -16,9 +16,16 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 	var Q;
 	var l,c;
 	if(zt>zl){
-		Q=sqrt(zt/zl-1);
+		Q=Math.sqrt(zt/zl-1);
 		X1=zt/Q;
-		X2=Zl*Q;
+		X2=zl*Q;
+		if(high == 1){
+			X1 = -X1;
+		}
+		else{
+			X2 = -X2;
+		}
+		drawMatchChart(z0,X1,X2,zl,this.ctx, 0);
 		
 		
 		if (high===1){
@@ -31,11 +38,16 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 		}
 	}
 	else{
-		Q=sqrt(zl/zt-1);
+		Q=Math.sqrt(zl/zt-1);
 		X1=zt*Q;
 		X2=zl/Q;
-		
-		
+		if(high == 1){
+			X2 = -X2;
+		}
+		else{
+			X1 = -X1;
+		}
+		drawMatchChart(z0,X1,X2,zl,this.ctx, 1);
 		if(high===1){
 			l=X2/(2*Math.PI*f0);
 			c=1/(X1*2*Math.PI*f0);
@@ -48,13 +60,49 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 	arglc.set('L',l);
 	arglc.set('C',c);
 
-	drawMatchChart(z0,X1,X2,zl,this.ctx); //根据z0，zl和X1，X2在ctx上画图
+ //根据z0，zl和X1，X2在ctx上画图
 	return arglc;
 };
 
-function drawMatchChart(z0,X1,X2,high,ctx){
-
+function drawMatchChart(z0,X1,X2,zl,ctx, a_more_than_i){
+	var X10 = X1 / z0;
+	var X20 = X2 / z0;
+	var zl0 = zl / z0;
+	//console.log(X10, X20, zl0);
+	var v = 1e-6;
+	var t_coord;
+	var t_impedence;
+	if(a_more_than_i == 1){
+		ctx.beginPath();
+		ctx.strokeStyle = "#00FF00";
+		matchList.push(impedence2coord(new Complex(zl0, 0)));
+		console.log(t_coord);
+		for(v = 1e-6; Math.abs(v) <= Math.abs(1.0/X20); v += (1.0/X20)/300.0){
+			t_impedence = parallel(new Complex(zl0, 0.0), new Complex(0.0, 1.0/v));
+			matchList.push(impedence2coord(t_impedence));
+		}
+		zl0 = t_impedence;
+		for(v = 1e-6; Math.abs(v) <= Math.abs(X10);v += X10/300.0){
+			t_impedence = zl0.add(new Complex(0, v));
+			matchList.push(impedence2coord(t_impedence));
+		}
+		smithChart.drawChart();
+	}
+	else{
+		matchList.push(impedence2coord(new Complex(zl0, 0)));
+		for(v = 1e-6; Math.abs(v) <= Math.abs(X20); v += X20/300.0){
+			t_impedence = new Complex(zl0, 0).add(new Complex(0, v));
+			matchList.push(impedence2coord(t_impedence));
+		}
+		zl0 = t_impedence;
+		for(v = 1e-6; Math.abs(v) <= Math.abs(1.0/X10); v += (1.0/X10)/300.0){
+			t_impedence = parallel(zl0, new Complex(0.0, 1.0/v));
+			matchList.push(impedence2coord(t_impedence));
+		}
+		smithChart.drawChart();
+	}
 }
+
 
 Match.prototype.matchall=function(){
 	var z0 = getValue(this.z0_id);
@@ -65,17 +113,22 @@ Match.prototype.matchall=function(){
 
 	var step=Math.log(zl)-Math.log(z0);
 	step=step/n;
-	
-	var Zall=[]
+	matchList = [];
+	var Zall=[];
 	for (var i=0;i<n+1;i++){
-		Zall.push(Math.exp(Math.log(z0)+step));
+		Zall.push(Math.exp(Math.log(z0)+i*step));
 	}
 	var L=[];
 	var C=[];
 	var arglc;
-	for(i=0;i<n+1;i++){
+	for(i=0;i<n;i++){
+		//console.log(Zall[i],Zall[i+1]);
 		arglc=this.matchsingle(z0, Zall[i],Zall[i+1],f0,high);
 		L.push(arglc.get('L'));
 		C.push(arglc.get('C'));
 	}
 };
+
+function parallel(Z1, Z2){
+	return Z1.inv().add(Z2.inv()).inv();
+}
