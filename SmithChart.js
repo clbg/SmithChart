@@ -1,4 +1,6 @@
- //构造函数，ctx为canvas context
+'use strict';
+
+//构造函数，ctx为canvas context
 
  function SmithChart(ctx){
     this.ctx = ctx;
@@ -71,6 +73,7 @@ SmithChart.prototype.drawChart=function(color){
 	var list1=[];
 	//draw losts of ZRe
 	list1.push(0.2,0.5,1,3,10);
+	var i;
     for(i in list1) {
         this.drawZRe(list1[i]);    //用高阶函数map的话，代码的B格确实提高了一个档次，然而js的高阶函数是个坑
     }                              //js并不能用句法来判断this是什么。如果用lambda表达式的话可以，但兼容性不好
@@ -83,7 +86,7 @@ SmithChart.prototype.drawChart=function(color){
 			return -x;
 		}
 
-	list22=list2.map(inve);
+	var list22=list2.map(inve);
 	list2=list2.concat(list22);
 	for(i in list2){
         this.drawZIm(list2[i]);

@@ -10,6 +10,10 @@ function getValue(id){
     return parseFloat(document.getElementById(id).value);
 }
 
+function getIntValue(id){
+    return parseInt(document.getElementById(id).value);
+}
+
 function impedence2gamma(impedence){
     return new Complex(-1,0).add(impedence).mul(new Complex(1,0).add(impedence).inv());
 }

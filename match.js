@@ -1,26 +1,23 @@
 //fo0 Hz; zo zl Ohm
+'use strict';
 
-
-function match(z0,zl,n,f0,high,ctx){			//high ===1 ��ͨ
-	this.z0=z0;
-	this.zl=zl;
-	this.n=n;
-	this.f0=f0;
-	this.high=high;	
-	if(z0===zl){
-		return;
-	}
+function Match(z0_id,zl_id,n_id,f0_id,high_id,ctx){			//high ===1 ��ͨ
+	this.z0_id=z0_id;
+	this.zl_id=zl_id;
+	this.n_id=n_id;
+	this.f0_id=f0_id;
+	this.high_id=high_id;
 	this.ctx=ctx;
 }
 
-match.prototype.matchsingle=function (z0,zl,f0,high){
+Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，从zl到zt,特征阻抗为z0
 	var arglc=new Map();
 	var X1,X2;
-	var Q
+	var Q;
 	var l,c;
-	if(z0>zl){
-		Q=sqrt(z0/zl-1);
-		X1=z0/Q;
+	if(zt>zl){
+		Q=sqrt(zt/zl-1);
+		X1=zt/Q;
 		X2=Zl*Q;
 		
 		
@@ -34,8 +31,8 @@ match.prototype.matchsingle=function (z0,zl,f0,high){
 		}
 	}
 	else{
-		Q=sqrt(zl/z0-1);
-		X1=z0*Q;
+		Q=sqrt(zl/zt-1);
+		X1=zt*Q;
 		X2=zl/Q;
 		
 		
@@ -50,11 +47,21 @@ match.prototype.matchsingle=function (z0,zl,f0,high){
 	}
 	arglc.set('L',l);
 	arglc.set('C',c);
-	
+
+	drawMatchChart(z0,X1,X2,zl);
 	return arglc;
 }
 
-math.prototype.matchall=function(z0,zl,n,f0,high){
+function drawMatchChart(z0,X1,X2,high){
+
+}
+
+Match.prototype.matchall=function(){
+	var z0 = getValue(this.z0_id);
+	var zl = getValue(this.zl_id);
+	var n = getIntValue(this.n_id);
+	var f0 = getValue(this.f0_id);
+	var high = getIntValue(this.high_id);
 	var step=Math.log(zl)-Math.log(z0);
 	step=step/n;
 	
@@ -66,15 +73,8 @@ math.prototype.matchall=function(z0,zl,n,f0,high){
 	var C=[];
 	var arglc;
 	for(i=0;i<n+1;i++){
-		arglc=this.matchsingle(Zall[i],Zall[i+1],f0,high);
+		arglc=this.matchsingle(z0, Zall[i],Zall[i+1],f0,high);
 		L.push(arglc.get('L'));
 		C.push(arglc.get('C'));
 	}
-	
-	
-	
-	
-	
-	
-	
 }
