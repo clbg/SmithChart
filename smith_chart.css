@@ -38,7 +38,7 @@ canvas#cv{
   margin: 10px;
 }
 
-div.control{
+div.control, div.match{
   width: 600px;
   border: 1px solid #777777;
   float: left;
