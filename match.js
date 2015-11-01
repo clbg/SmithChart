@@ -48,11 +48,11 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 	arglc.set('L',l);
 	arglc.set('C',c);
 
-	drawMatchChart(z0,X1,X2,zl);
+	drawMatchChart(z0,X1,X2,zl,this.ctx);
 	return arglc;
 }
 
-function drawMatchChart(z0,X1,X2,high){
+function drawMatchChart(z0,X1,X2,high,ctx){
 
 }
 
