@@ -48,9 +48,9 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 	arglc.set('L',l);
 	arglc.set('C',c);
 
-	drawMatchChart(z0,X1,X2,zl,this.ctx);
+	drawMatchChart(z0,X1,X2,zl,this.ctx); //根据z0，zl和X1，X2在ctx上画图
 	return arglc;
-}
+};
 
 function drawMatchChart(z0,X1,X2,high,ctx){
 
@@ -62,6 +62,7 @@ Match.prototype.matchall=function(){
 	var n = getIntValue(this.n_id);
 	var f0 = getValue(this.f0_id);
 	var high = getIntValue(this.high_id);
+
 	var step=Math.log(zl)-Math.log(z0);
 	step=step/n;
 	
@@ -77,4 +78,4 @@ Match.prototype.matchall=function(){
 		L.push(arglc.get('L'));
 		C.push(arglc.get('C'));
 	}
-}
+};

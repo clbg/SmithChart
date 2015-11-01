@@ -1,6 +1,6 @@
 'use strict';
-
-var smithChart = new SmithChart(document.getElementById("cv").getContext("2d"));
+var ctx = document.getElementById("cv").getContext("2d");
+var smithChart = new SmithChart(ctx);
 
 function setValue(x, id){
     document.getElementById(id).value = x.toFixed(2).toString();
@@ -123,3 +123,7 @@ function cvClick(){
 }
 
 smithChart.drawChart();
+var match = new Match("R_I","R_A","order","freq","high",ctx);
+function startMatch(){
+    match.matchall();
+}

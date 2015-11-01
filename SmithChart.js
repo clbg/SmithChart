@@ -94,6 +94,7 @@ SmithChart.prototype.drawChart=function(color){
 
     this.ctx.stroke();
 	this.ctx.font = "15px Arial";
+	//绘制角度
 	this.ctx.fillText("0",590,300);
 	this.ctx.fillText("30",559,150);
 	this.ctx.fillText("60",450, 41);
@@ -106,12 +107,23 @@ SmithChart.prototype.drawChart=function(color){
 	this.ctx.fillText("-90", 293, 590);
 	this.ctx.fillText("-120",136, 567);
 	this.ctx.fillText("-150", 20, 455);
+
+	//绘制Z_Re
 	this.ctx.fillText("1.0",300,300);
 	this.ctx.fillText("3.0", 450, 300);
 	this.ctx.fillText("10.0", 550,300);
 	this.ctx.fillText("0.5", 200,300);
 	this.ctx.fillText("0.2", 100,300);
 
+	//绘制Z_Im
+	this.ctx.fillText("0.2", 300,280);
+	this.ctx.fillText("0.5", 330,230);
+	this.ctx.fillText("1", 310, 110);
+	this.ctx.fillText("3", 500, 220);
+	this.ctx.fillText("-0.2", 300,320);
+	this.ctx.fillText("-0.5", 330,370);
+	this.ctx.fillText("-1", 310, 490);
+	this.ctx.fillText("-3", 500, 380);
 };
 
 
