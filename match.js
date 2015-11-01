@@ -74,7 +74,7 @@ function drawMatchChart(z0,X1,X2,zl,ctx, a_more_than_i){
 	var t_impedence;
 	if(a_more_than_i == 1){
 		ctx.beginPath();
-		ctx.strokeStyle = "#00FF00";
+		ctx.strokeStyle = "#FFFF00";
 		matchList.push(impedence2coord(new Complex(zl0, 0)));
 		console.log(t_coord);
 		for(v = 1e-6; Math.abs(v) <= Math.abs(1.0/X20); v += (1.0/X20)/300.0){
@@ -150,8 +150,8 @@ Match.prototype.matchall=function(){
 	document.getElementById("cir_img").src = s;
 	var sd="L、C参数如下：<br>"; //S_how wor_D
 	for(i=0;i<n;i++){
-		sd=sd+"L"+i+":\t"+L[i].toPrecision(4)+"H<br>";
-		sd=sd+"C"+i+":\t"+C[i].toPrecision(4)+"F<br>"+"<br>";
+		sd=sd+"L"+(i+1)+":\t"+L[i].toPrecision(4)+"H<br>";
+		sd=sd+"C"+(i+1)+":\t"+C[i].toPrecision(4)+"F<br>"+"<br>";
 
 	}
 

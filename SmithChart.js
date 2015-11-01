@@ -30,6 +30,8 @@ SmithChart.prototype.drawZIm=function(ZIm, color){
 
 	var color = arguments[1] ? arguments[1] : "#000080";
 	this.ctx.strokeStyle = color;
+
+	this.ctx.lineWidth=5;
 	if(ZIm===0){
 		this.ctx.moveTo(nz(0),nz(1));
 		this.ctx.lineTo(nz(2),nz(1));
@@ -50,6 +52,7 @@ SmithChart.prototype.drawZRe=function(ZRe, color){
 	this.ctx.beginPath();
 	var color = arguments[1] ? arguments[1] : "#708090";
 	this.ctx.strokeStyle = color
+	this.ctx.lineWidth=5;
 	this.ctx.arc(nz(ZRe/(ZRe+1)+1),nz(1),nz(1/(ZRe+1)),0,2*Math.PI,false);
 	this.ctx.stroke();
 };
@@ -60,6 +63,7 @@ SmithChart.prototype.drawCoord=function(color){
 	this.ctx.beginPath();
 	var color = arguments[1] ? arguments[1] : "#8B5742";
 	this.ctx.strokeStyle = color;
+	this.ctx.lineWidth=45;
 	this.ctx.moveTo(nz(0),nz(1));
 	this.ctx.lineTo(nz(2),nz(1));
 	this.ctx.moveTo(nz(1),nz(0));
@@ -70,10 +74,14 @@ SmithChart.prototype.drawCoord=function(color){
 // 清空背景，然后重新绘制整个圆图（包括两种圆，横纵轴）
 SmithChart.prototype.drawChart=function(color){
 
+	var color = arguments[1] ? arguments[1] : "#000000";
+
+	//this.ctx.drawCoord(color);
+
 	this.ctx.clearRect (0,0,nz(2),nz(2));
 	this.ctx.beginPath();
-	var color = arguments[1] ? arguments[1] : "#000000";
-	this.ctx.strokeStyle = color
+	this.ctx.strokeStyle = color;
+
 	this.ctx.arc(300,300,300,Math.PI,-Math.PI,false);
 	this.ctx.stroke();
 	this.ctx.moveTo(nz(0),nz(1));
@@ -81,14 +89,14 @@ SmithChart.prototype.drawChart=function(color){
 	this.ctx.moveTo(nz(1),nz(0));
 	this.ctx.lineTo(nz(1),nz(2));
 	var list1=[];
-	//draw losts of ZRe
+	//draw lots of ZRe
 	list1.push(0.2,0.5,1,3,10);
 	var i;
     for(i in list1) {
         this.drawZRe(list1[i]);    //用高阶函数map的话，代码的B格确实提高了一个档次，然而js的高阶函数是个坑
     }                              //js并不能用句法来判断this是什么。如果用lambda表达式的话可以，但兼容性不好
 	var list2=[];                  //老老实实用for语句吧
-	//draw losts of ZIm
+	//draw lots of ZIm
 	list2.push(0,0.2,0.5,1,3,10);
 
 
