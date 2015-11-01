@@ -69,28 +69,14 @@ SmithChart.prototype.drawChart=function(color){
 	this.ctx.moveTo(nz(1),nz(0));
 	this.ctx.lineTo(nz(1),nz(2));
 	var list1=[];
-    var R;
 	//draw losts of ZRe
-	for(R=0.1;R<1;R=R+0.1)
-		list1.push(R)
-	for(R=1;R<2;R=R+0.2)
-		list1.push(R);
-	for(R=2;R<5;R=R+1)
-		list1.push(R);
-	list1.push(5,10,20,50);
+	list1.push(0.2,0.5,1,3,10);
     for(i in list1) {
         this.drawZRe(list1[i]);    //用高阶函数map的话，代码的B格确实提高了一个档次，然而js的高阶函数是个坑
     }                              //js并不能用句法来判断this是什么。如果用lambda表达式的话可以，但兼容性不好
 	var list2=[];                  //老老实实用for语句吧
 	//draw losts of ZIm
-
-	for(R =0;R <1; R=R+0.1)
-		list2.push(R);
-	for(R=1;R<2;R=R+0.2)
-		list2.push(R);
-	for(R=2;R<5;R=R+1)
-		list2.push(R);
-	list2.push(5,10,20,50);
+	list2.push(0,0.2,0.5,1,3,10);
 
 
 		function inve(x){
@@ -104,6 +90,25 @@ SmithChart.prototype.drawChart=function(color){
     }
 
     this.ctx.stroke();
+	this.ctx.font = "15px Arial";
+	this.ctx.fillText("0",590,300);
+	this.ctx.fillText("30",559,150);
+	this.ctx.fillText("60",450, 41);
+	this.ctx.fillText("90", 293, 10);
+	this.ctx.fillText("120",136, 33);
+	this.ctx.fillText("150", 20, 145);
+	this.ctx.fillText("180", 1, 300);
+	this.ctx.fillText("-30",559,450);
+	this.ctx.fillText("-60",450, 559);
+	this.ctx.fillText("-90", 293, 590);
+	this.ctx.fillText("-120",136, 567);
+	this.ctx.fillText("-150", 20, 455);
+	this.ctx.fillText("1.0",300,300);
+	this.ctx.fillText("3.0", 450, 300);
+	this.ctx.fillText("10.0", 550,300);
+	this.ctx.fillText("0.5", 200,300);
+	this.ctx.fillText("0.2", 100,300);
+
 };
 
 

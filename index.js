@@ -43,7 +43,7 @@ function updateValueAndChart(value){
         setValue(gamma.r, "gamma_re");
         setValue(gamma.i, "gamma_im");
         setValue(gamma.mag(), "gamma_r");
-        setValue(gamma.angle(), "gamma_theta");
+        setValue(gamma.angle()*(180.0/Math.PI), "gamma_theta");
     }
 }
 
@@ -57,7 +57,7 @@ function gammaRiOK(){
 
 function gammaRtOK(){
     var fn = function(x, y){
-        var gamma = new Complex({angle: getValue("gamma_theta"), mag: getValue("gamma_r")});
+        var gamma = new Complex({angle: getValue("gamma_theta")*(Math.PI/180.0), mag: getValue("gamma_r")});
         updateValueAndChart({gamma: gamma});
     };
     fn(getValue("gamma_re"), getValue("gamma_im"));
