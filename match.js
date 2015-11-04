@@ -11,7 +11,8 @@ function Match(z0_id,zl_id,n_id,f0_id,high_id,ctx){			//high ===1 ��ͨ
 }
 
 Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，从zl到zt,特征阻抗为z0
-	var arglc=new Map();
+	var larg;
+	var carg;
 	var X1,X2;
 	var Q;
 	var l,c;
@@ -29,12 +30,12 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 		
 		
 		if (high===1){
-			l=X2/(2*Math.PI*f0);
-			c=-1/(X1*2*Math.PI*f0);
+			larg=(X2/(2*Math.PI*f0));
+			carg=(-1/(X1*2*Math.PI*f0));
 		}
 		else{
-			l=X1/(2*Math.PI*f0);
-			c=-1/(X2*2*Math.PI*f0);
+			larg=(X1/(2*Math.PI*f0));
+			carg=(-1/(X2*2*Math.PI*f0));
 		}
 	}
 	else{
@@ -49,19 +50,16 @@ Match.prototype.matchsingle=function (z0,zt,zl,f0,high){ //单次阻抗变换，
 		}
 		drawMatchChart(z0,X1,X2,zl,this.ctx, 1);
 		if(high===1){
-			l=X1/(2*Math.PI*f0);
-			c= -1/(X2*2*Math.PI*f0);
+			larg=(X1/(2*Math.PI*f0));
+			carg=(-1/(X2*2*Math.PI*f0));
 		}
 		else{
-			l=X2/(2*Math.PI*f0);
-			c=-1/(X1*2*Math.PI*f0);
+			larg=(X2/(2*Math.PI*f0));
+			carg=(-1/(X1*2*Math.PI*f0));
 		}
 	}
-	arglc.set('L',l);
-	arglc.set('C',c);
-
- //根据z0，zl和X1，X2在ctx上画图
-	return arglc;
+	
+	return {larg:larg,carg:carg};
 };
 
 function drawMatchChart(z0,X1,X2,zl,ctx, a_more_than_i){
@@ -124,8 +122,8 @@ Match.prototype.matchall=function(){
 	for(i=0;i<n;i++){
 		//console.log(Zall[i],Zall[i+1]);
 		arglc=this.matchsingle(z0, Zall[i],Zall[i+1],f0,high);
-		L.push(arglc.get('L'));
-		C.push(arglc.get('C'));
+		L.push(arglc.larg);
+		C.push(arglc.carg);
 	}
 
 	var s='nPQ';
