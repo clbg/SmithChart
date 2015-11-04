@@ -22,16 +22,17 @@ function gamma2impedence(gamma){
 }
 
 // 画阻抗虚部的圆
-SmithChart.prototype.drawZIm=function(ZIm, color){
+SmithChart.prototype.drawZIm=function(ZIm, color,width){
 	var theta;
 	theta=Math.atan(ZIm);
 	this.ctx.beginPath();
 
 
-	var color = arguments[1] ? arguments[1] : "#000080";
+	 color = arguments[1] ? arguments[1] : "#000000";
+	 width= arguments[2] ? arguments[2]:3;
 	this.ctx.strokeStyle = color;
 
-	this.ctx.lineWidth=5;
+	this.ctx.lineWidth=width;
 	if(ZIm===0){
 		this.ctx.moveTo(nz(0),nz(1));
 		this.ctx.lineTo(nz(2),nz(1));
@@ -48,46 +49,58 @@ SmithChart.prototype.drawZIm=function(ZIm, color){
 
 // 画阻抗实部的圆
 
-SmithChart.prototype.drawZRe=function(ZRe, color){
+SmithChart.prototype.drawZRe=function(ZRe, color,width){
 	this.ctx.beginPath();
-	var color = arguments[1] ? arguments[1] : "#708090";
-	this.ctx.strokeStyle = color
-	this.ctx.lineWidth=5;
+	 color = arguments[1] ? arguments[1] : "#000000";
+	 width =arguments[2]?arguments[2]:3;
+	this.ctx.strokeStyle = color;
+	this.ctx.lineWidth=width;
 	this.ctx.arc(nz(ZRe/(ZRe+1)+1),nz(1),nz(1/(ZRe+1)),0,2*Math.PI,false);
 	this.ctx.stroke();
 };
 
 
+
+
+
+
 // 画坐标系（横纵轴）
 SmithChart.prototype.drawCoord=function(color){
 	this.ctx.beginPath();
-	var color = arguments[1] ? arguments[1] : "#8B5742";
+	color = arguments[0] ? arguments[0] : "#8B5742";
 	this.ctx.strokeStyle = color;
-	this.ctx.lineWidth=45;
+	this.ctx.lineWidth= 4;
 	this.ctx.moveTo(nz(0),nz(1));
 	this.ctx.lineTo(nz(2),nz(1));
 	this.ctx.moveTo(nz(1),nz(0));
 	this.ctx.lineTo(nz(1),nz(2));
+	//this.ctx.closePath();
 	this.ctx.stroke();
 };
 
+
+
 // 清空背景，然后重新绘制整个圆图（包括两种圆，横纵轴）
-SmithChart.prototype.drawChart=function(color){
+SmithChart.prototype.drawChart=function(color,width){
 
-	var color = arguments[1] ? arguments[1] : "#000000";
+	color = arguments[1] ? arguments[1] : "#000000";
 
-	//this.ctx.drawCoord(color);
+
 
 	this.ctx.clearRect (0,0,nz(2),nz(2));
+	//this.drawCoord("#00BFFF");
+
+
+
 	this.ctx.beginPath();
 	this.ctx.strokeStyle = color;
 
 	this.ctx.arc(300,300,300,Math.PI,-Math.PI,false);
 	this.ctx.stroke();
-	this.ctx.moveTo(nz(0),nz(1));
+	/*this.ctx.moveTo(nz(0),nz(1));
 	this.ctx.lineTo(nz(2),nz(1));
 	this.ctx.moveTo(nz(1),nz(0));
-	this.ctx.lineTo(nz(1),nz(2));
+	this.ctx.lineTo(nz(1),nz(2));*/
 	var list1=[];
 	//draw lots of ZRe
 	list1.push(0.2,0.5,1,3,10);
@@ -143,7 +156,7 @@ SmithChart.prototype.drawChart=function(color){
 	this.ctx.fillText("-1", 310, 490);
 	this.ctx.fillText("-3", 500, 380);
 	this.ctx.beginPath();
-	this.ctx.strokeStyle="#00ff00";
+	this.ctx.strokeStyle="#82FA58";
 	for(i in matchList){
 		if(i == '0'){
 			this.ctx.moveTo(matchList[i].x, matchList[i].y);
@@ -162,6 +175,10 @@ SmithChart.prototype.drawArc=function(start, angle, color){
 
 };
 
+function Coord(x, y){
+	this.x = x;
+	this.y = y;
+}
 
 function impedence2coord(impedence){
 	var gamma = impedence2gamma(impedence);
@@ -171,7 +188,3 @@ function impedence2coord(impedence){
 }
 
 //alert("同学您好！130222班 杨力同学诚招女友，微信：“yangliTXWD”，非诚勿扰~");
-function Coord(x, y){
-	this.x = x;
-	this.y = y;
-}

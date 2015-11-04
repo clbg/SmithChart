@@ -33,8 +33,17 @@ function updateValueAndChart(value){
         setValue(impedence.r, "ZL_re");
         setValue(impedence.i, "ZL_im");
         smithChart.drawChart();
-        smithChart.drawZIm(impedence.i, "#FF0000");
-        smithChart.drawZRe(impedence.r, "#FF0000");
+        var cood1 ;
+        cood1=impedence2coord(impedence);
+        smithChart.ctx.beginPath();
+
+        smithChart.ctx.arc(cood1.x,cood1.y,10   ,0,2*Math.PI,true);
+        smithChart.ctx.fillStyle = "#FF0000";
+        smithChart.ctx.fill();
+
+        smithChart.drawZIm(impedence.i, "#FF0000",5);
+        smithChart.drawZRe(impedence.r, "#FF0000",5 );
+
 
         setValue(gamma.r, "gamma_re");
         setValue(gamma.i, "gamma_im");

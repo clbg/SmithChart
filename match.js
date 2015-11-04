@@ -77,12 +77,12 @@ function drawMatchChart(z0,X1,X2,zl,ctx, a_more_than_i){
 		ctx.strokeStyle = "#FFFF00";
 		matchList.push(impedence2coord(new Complex(zl0, 0)));
 		console.log(t_coord);
-		for(v = 1e-6; Math.abs(v) <= Math.abs(1.0/X20); v += (1.0/X20)/300.0){
+		for(v = 1e-6; Math.abs(v) < Math.abs(1.0/X20); v += (1.0/X20)/300.0){
 			t_impedence = parallel(new Complex(zl0, 0.0), new Complex(0.0, 1.0/v));
 			matchList.push(impedence2coord(t_impedence));
 		}
 		zl0 = t_impedence;
-		for(v = 1e-6; Math.abs(v) <= Math.abs(X10);v += X10/300.0){
+		for(v = 1e-6; Math.abs(v) < Math.abs(X10);v += X10/300.0){
 			t_impedence = zl0.add(new Complex(0, v));
 			matchList.push(impedence2coord(t_impedence));
 		}
@@ -90,12 +90,12 @@ function drawMatchChart(z0,X1,X2,zl,ctx, a_more_than_i){
 	}
 	else{
 		matchList.push(impedence2coord(new Complex(zl0, 0)));
-		for(v = 1e-6; Math.abs(v) <= Math.abs(X20); v += X20/300.0){
+		for(v = 1e-6; Math.abs(v) < Math.abs(X20); v += X20/300.0){
 			t_impedence = new Complex(zl0, 0).add(new Complex(0, v));
 			matchList.push(impedence2coord(t_impedence));
 		}
 		zl0 = t_impedence;
-		for(v = 1e-6; Math.abs(v) <= Math.abs(1.0/X10); v += (1.0/X10)/300.0){
+		for(v = 1e-6; Math.abs(v) < Math.abs(1.0/X10); v += (1.0/X10)/300.0){
 			t_impedence = parallel(zl0, new Complex(0.0, 1.0/v));
 			matchList.push(impedence2coord(t_impedence));
 		}
