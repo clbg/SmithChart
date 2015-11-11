@@ -3,7 +3,7 @@ div,p{
       "Microsoft Yahei",
       sans-serif,
       "WenQuanYi Microhei";
-  font-size: 16pt;
+  font-size: 10pt;
 }
 
 div.header{
@@ -39,11 +39,11 @@ canvas#cv{
 }
 
 div.control, div.match{
-  width: 600px;
+  width: 300px;
   border: 1px solid #777777;
   float: left;
-  padding: 10px;
-  margin: 10px;
+  padding: 5px;
+  margin: 5px;
 }
 
 div.footer{
