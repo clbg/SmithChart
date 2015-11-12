@@ -53,6 +53,11 @@ div.footer{
   clear:both;
 }
 
+div.footer p{
+  font-size: 16pt;
+}
+
+
 div.footer a{
   color:#aaaaaa;
 }
